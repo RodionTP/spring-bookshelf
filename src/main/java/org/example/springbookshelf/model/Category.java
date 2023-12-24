@@ -1,21 +1,25 @@
 package org.example.springbookshelf.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Category implements Serializable {
     @Id
-    @Column(name = "book_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "book_id")
+    @OneToOne(mappedBy = "category")
+    @ToString.Exclude
+    @JsonIgnore
     private Book book;
 }
