@@ -74,9 +74,4 @@ public class BookController {
         bookService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("/cat")
-    public ResponseEntity<List<Category>> cat() {
-        return ResponseEntity.ok(categoryRepository.findAll());
-    }
 }
